@@ -4,7 +4,7 @@ import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { Icon } from "@/components/ui/Icon";
 import { PageHeader } from "@/components/sections/PageHeader";
-import { achievements, galleryImages } from "@/data/home";
+import { getAchievements, getGallery } from "@/lib/public-api";
 
 export const metadata: Metadata = {
   title: "Achievements | HHG Tuition Academy",
@@ -19,7 +19,11 @@ const boardResults = [
   { value: "100/100", label: "Perfect Scores" },
 ];
 
-export default function AchievementsPage() {
+export default async function AchievementsPage() {
+  const [achievements, galleryImages] = await Promise.all([
+    getAchievements(),
+    getGallery(),
+  ]);
   return (
     <>
       <PageHeader

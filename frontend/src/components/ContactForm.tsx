@@ -48,14 +48,46 @@ export function ContactForm() {
     ) =>
       setForm((prev) => ({ ...prev, [field]: e.target.value }));
 
+  const [error, setError] = useState<string | null>(null);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitting(true);
-    // TODO (Phase 7): POST form to the backend inquiries endpoint.
-    await new Promise((r) => setTimeout(r, 600));
-    setSubmitting(false);
-    setSubmitted(true);
-    setForm(initialState);
+    setError(null);
+    const apiBase =
+      process.env.NEXT_PUBLIC_API_BASE_URL ?? "http://localhost:8000/api/v1";
+    try {
+      const res = await fetch(`${apiBase}/inquiries`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          full_name: form.fullName,
+          email: form.email,
+          phone: form.phone,
+          student_class: form.studentClass,
+          subject: form.subject,
+          message: form.message,
+        }),
+      });
+      if (!res.ok) {
+        const data = await res.json().catch(() => null);
+        throw new Error(
+          typeof data?.detail === "string"
+            ? data.detail
+            : "Something went wrong. Please try again.",
+        );
+      }
+      setSubmitted(true);
+      setForm(initialState);
+    } catch (err) {
+      setError(
+        err instanceof Error
+          ? err.message
+          : "Unable to submit. Please try again later.",
+      );
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   if (submitted) {
@@ -91,6 +123,12 @@ export function ContactForm() {
         Fill out the form below and our team will get back to you within 24 hours.
       </p>
       <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+        {error && (
+          <div className="flex items-center gap-2 rounded-lg bg-error-container px-4 py-3 text-label-md font-medium text-on-error-container">
+            <Icon name="error" className="text-xl" />
+            {error}
+          </div>
+        )}
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
           <Input
             id="fullName"

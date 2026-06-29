@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { PageHeader } from "@/components/sections/PageHeader";
 import { CoursesCatalog } from "@/components/sections/CoursesCatalog";
 import { Icon } from "@/components/ui/Icon";
+import { getCourses } from "@/lib/public-api";
 
 export const metadata: Metadata = {
   title: "Our Courses | HHG Tuition Academy",
@@ -15,7 +16,8 @@ const progressBars = [
   { label: "Confidence", value: 95 },
 ];
 
-export default function CoursesPage() {
+export default async function CoursesPage() {
+  const courses = await getCourses();
   return (
     <>
       <PageHeader
@@ -24,7 +26,7 @@ export default function CoursesPage() {
         subtitle="Empowering students through rigorous academic support and modern learning techniques. Choose your path to excellence."
       />
 
-      <CoursesCatalog />
+      <CoursesCatalog courses={courses} />
 
       {/* Track Your Learning Journey */}
       <section className="bg-surface-container-low py-24">

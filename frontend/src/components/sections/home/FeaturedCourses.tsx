@@ -2,9 +2,9 @@ import Link from "next/link";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { Icon } from "@/components/ui/Icon";
-import { courses } from "@/data/home";
+import type { Course } from "@/data/home";
 
-export function FeaturedCourses() {
+export function FeaturedCourses({ courses }: { courses: Course[] }) {
   return (
     <section id="courses" className="bg-surface-container-low py-24">
       <div className="mx-auto max-w-container-max px-margin-mobile md:px-margin-desktop">

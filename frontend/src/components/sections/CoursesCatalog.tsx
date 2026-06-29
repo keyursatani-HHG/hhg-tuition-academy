@@ -4,19 +4,23 @@ import { useMemo, useState } from "react";
 import { CourseCard } from "@/components/CourseCard";
 import { Icon } from "@/components/ui/Icon";
 import { Button } from "@/components/ui/Button";
-import { allCourses, courseCategories } from "@/data/courses";
+import type { Course } from "@/data/home";
 
 /**
  * Searchable, filterable course catalog. Includes a "not sure which course"
  * promo card mixed into the grid, matching the design.
  */
-export function CoursesCatalog() {
+export function CoursesCatalog({ courses }: { courses: Course[] }) {
+  const courseCategories = useMemo(
+    () => ["All Subjects", ...Array.from(new Set(courses.map((c) => c.category)))],
+    [courses],
+  );
   const [query, setQuery] = useState("");
-  const [category, setCategory] = useState(courseCategories[0]);
+  const [category, setCategory] = useState("All Subjects");
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
-    return allCourses.filter((c) => {
+    return courses.filter((c) => {
       const matchesCategory =
         category === courseCategories[0] || c.category === category;
       const matchesQuery =
@@ -26,7 +30,7 @@ export function CoursesCatalog() {
         c.category.toLowerCase().includes(q);
       return matchesCategory && matchesQuery;
     });
-  }, [query, category]);
+  }, [query, category, courses]);
 
   return (
     <section className="bg-surface py-16">

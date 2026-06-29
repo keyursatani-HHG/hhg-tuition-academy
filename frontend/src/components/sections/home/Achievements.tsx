@@ -1,9 +1,9 @@
 import Image from "next/image";
 import { Badge } from "@/components/ui/Badge";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { achievements } from "@/data/home";
+import type { Achievement } from "@/data/home";
 
-export function Achievements() {
+export function Achievements({ achievements }: { achievements: Achievement[] }) {
   return (
     <section id="achievements" className="bg-surface-container-low py-24">
       <div className="mx-auto max-w-container-max px-margin-mobile md:px-margin-desktop">

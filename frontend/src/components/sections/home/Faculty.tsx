@@ -1,8 +1,8 @@
 import Image from "next/image";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { faculty } from "@/data/home";
+import type { Faculty as FacultyType } from "@/data/home";
 
-export function Faculty() {
+export function Faculty({ faculty }: { faculty: FacultyType[] }) {
   return (
     <section id="faculty" className="bg-surface py-24">
       <div className="mx-auto max-w-container-max px-margin-mobile md:px-margin-desktop">

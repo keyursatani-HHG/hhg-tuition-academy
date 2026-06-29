@@ -3,7 +3,8 @@ import Image from "next/image";
 import { Badge } from "@/components/ui/Badge";
 import { Icon } from "@/components/ui/Icon";
 import { PageHeader } from "@/components/sections/PageHeader";
-import { facultyMembers, trustedBy } from "@/data/faculty";
+import { trustedBy } from "@/data/faculty";
+import { getFaculty } from "@/lib/public-api";
 
 export const metadata: Metadata = {
   title: "Our Faculty | HHG Tuition Academy",
@@ -11,7 +12,8 @@ export const metadata: Metadata = {
     "Learn from world-class educators — PhD holders, chartered accountants and master teachers dedicated to your academic success.",
 };
 
-export default function FacultyPage() {
+export default async function FacultyPage() {
+  const facultyMembers = await getFaculty();
   return (
     <>
       <PageHeader

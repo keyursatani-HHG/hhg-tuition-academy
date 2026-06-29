@@ -1,9 +1,9 @@
 import Image from "next/image";
 import { Icon } from "@/components/ui/Icon";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { testimonials } from "@/data/home";
+import type { Testimonial } from "@/data/home";
 
-export function Testimonials() {
+export function Testimonials({ testimonials }: { testimonials: Testimonial[] }) {
   return (
     <section className="overflow-hidden bg-surface-container-highest/20 py-24">
       <div className="mx-auto max-w-container-max px-margin-mobile md:px-margin-desktop">

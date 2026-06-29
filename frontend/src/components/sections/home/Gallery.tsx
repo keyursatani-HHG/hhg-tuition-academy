@@ -1,9 +1,13 @@
 import Image from "next/image";
 import { Button } from "@/components/ui/Button";
-import { galleryImages } from "@/data/home";
 import { cn } from "@/lib/utils";
 
-export function Gallery() {
+interface GalleryItem {
+  src: string;
+  alt: string;
+}
+
+export function Gallery({ images }: { images: GalleryItem[] }) {
   return (
     <section className="bg-surface py-24">
       <div className="mx-auto max-w-container-max px-margin-mobile md:px-margin-desktop">
@@ -22,7 +26,7 @@ export function Gallery() {
         </div>
 
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {galleryImages.map((img, i) => (
+          {images.map((img, i) => (
             <div
               key={`${img.alt}-${i}`}
               className={cn(
