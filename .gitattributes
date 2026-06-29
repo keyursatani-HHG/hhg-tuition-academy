@@ -1,0 +1,16 @@
+# Normalize line endings. Shell scripts MUST stay LF or they break in Linux
+# containers (the Docker entrypoint is bash). Keep other text auto-normalized.
+* text=auto eol=lf
+
+*.sh           text eol=lf
+Dockerfile     text eol=lf
+docker-entrypoint.sh text eol=lf
+
+# Binary assets — never touch.
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.ico binary
+*.woff binary
+*.woff2 binary
+*.rar binary
