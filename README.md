@@ -42,14 +42,31 @@ See each package's README:
 
 ## Build Phases
 
-This project is built phase by phase:
+This project was built phase by phase — all complete:
 
 - **Phase 0** — Environment check & monorepo scaffold ✅
-- **Phase 1** — Frontend foundation + Home page
-- **Phase 2** — Remaining public pages (About, Courses, Faculty, Achievements, Contact)
-- **Phase 3** — Backend foundation (FastAPI, DB, migrations)
-- **Phase 4** — JWT admin authentication
-- **Phase 5** — Domain APIs (courses, faculty, inquiries, …)
-- **Phase 6** — Admin portal UI
-- **Phase 7** — Public ↔ API integration
-- **Phase 8** — DevOps & deployment
+- **Phase 1** — Frontend foundation + Home page ✅
+- **Phase 2** — Remaining public pages (About, Courses, Faculty, Achievements, Contact) ✅
+- **Phase 3** — Backend foundation (FastAPI, DB, migrations) ✅
+- **Phase 4** — JWT admin authentication ✅
+- **Phase 5** — Domain APIs (courses, faculty, inquiries, …) ✅
+- **Phase 6** — Admin portal UI (`/admin/*`) ✅
+- **Phase 7** — Public ↔ API integration ✅
+- **Phase 8** — DevOps & deployment ✅
+
+## Local Development
+
+```bash
+# Backend (terminal 1)
+cd backend && .venv/Scripts/activate && uvicorn app.main:app --reload --port 8000
+
+# Frontend (terminal 2)
+cd frontend && npm run dev    # http://localhost:3000
+```
+
+Public site: http://localhost:3000 · Admin: http://localhost:3000/admin/login · API docs: http://localhost:8000/docs
+
+## Deployment
+
+See [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md) — Vercel (frontend) + VPS (backend + Postgres),
+with Docker Compose, Nginx, systemd, and CI all included.

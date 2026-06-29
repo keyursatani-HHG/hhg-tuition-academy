@@ -1,0 +1,26 @@
+# systemd unit for running the FastAPI backend with Gunicorn on a VPS
+# (alternative to Docker). Install at /etc/systemd/system/hhg-backend.service
+#   sudo systemctl daemon-reload
+#   sudo systemctl enable --now hhg-backend
+
+[Unit]
+Description=HHG Academy FastAPI backend
+After=network.target postgresql.service
+
+[Service]
+Type=simple
+User=hhg
+Group=hhg
+WorkingDirectory=/srv/hhg/backend
+EnvironmentFile=/srv/hhg/backend/.env
+# Apply migrations then start Gunicorn with Uvicorn workers.
+ExecStartPre=/srv/hhg/backend/.venv/bin/alembic upgrade head
+ExecStart=/srv/hhg/backend/.venv/bin/gunicorn app.main:app \
+    --worker-class uvicorn.workers.UvicornWorker \
+    --workers 4 \
+    --bind 127.0.0.1:8000
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

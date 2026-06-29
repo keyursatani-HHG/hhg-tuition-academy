@@ -1,5 +1,6 @@
-# Local development stack. Postgres is the only required service for the backend.
-# The backend service is included for full containerized runs (Phase 8).
+# Full local stack: PostgreSQL + FastAPI backend.
+# Usage:  docker compose up --build
+# The backend applies migrations on start (see docker-entrypoint.sh).
 services:
   db:
     image: postgres:18-alpine
@@ -19,17 +20,23 @@ services:
       timeout: 5s
       retries: 5
 
-  # Backend is wired up in Phase 3 (Dockerfile added then). Uncomment to use.
-  # backend:
-  #   build: ./backend
-  #   container_name: hhg_backend
-  #   restart: unless-stopped
-  #   env_file: ./backend/.env
-  #   depends_on:
-  #     db:
-  #       condition: service_healthy
-  #   ports:
-  #     - "8000:8000"
+  backend:
+    build: ./backend
+    container_name: hhg_backend
+    restart: unless-stopped
+    environment:
+      # Inside the compose network, reach Postgres by its service name.
+      DATABASE_URL: postgresql+asyncpg://hhg:hhg_password@db:5432/hhg_academy
+      ENVIRONMENT: production
+      DEBUG: "false"
+      # Override these in a real deployment (use a .env file or secrets):
+      SECRET_KEY: ${SECRET_KEY:-change-me-please-use-a-long-random-string}
+      BACKEND_CORS_ORIGINS: ${BACKEND_CORS_ORIGINS:-http://localhost:3000}
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "8000:8000"
 
 volumes:
   hhg_pgdata:
