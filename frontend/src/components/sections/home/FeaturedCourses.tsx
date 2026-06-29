@@ -18,7 +18,7 @@ export function FeaturedCourses() {
             </p>
           </div>
           <Link
-            href="#courses"
+            href="/courses"
             className="group flex items-center gap-2 font-bold text-primary"
           >
             View All Courses
@@ -68,7 +68,7 @@ export function FeaturedCourses() {
                   </div>
                 </div>
                 <Button
-                  href="#contact"
+                  href="/courses"
                   variant="secondary"
                   className="mt-8 w-full py-4"
                 >

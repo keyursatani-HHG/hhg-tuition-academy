@@ -16,7 +16,7 @@ export function Gallery() {
               Peek into our vibrant classrooms and activities.
             </p>
           </div>
-          <Button href="#achievements" variant="soft" className="px-8 py-3">
+          <Button href="/achievements" variant="soft" className="px-8 py-3">
             View Gallery
           </Button>
         </div>

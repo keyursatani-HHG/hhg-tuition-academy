@@ -30,10 +30,10 @@ export function Hero() {
             personalized mentorship.
           </p>
           <div className="flex flex-wrap gap-6">
-            <Button href="#contact" size="xl" className="shadow-2xl">
+            <Button href="/courses" size="xl" className="shadow-2xl">
               Join Now <Icon name="trending_flat" />
             </Button>
-            <Button href="#contact" variant="outline-light" size="xl">
+            <Button href="/contact" variant="outline-light" size="xl">
               Contact Us
             </Button>
           </div>

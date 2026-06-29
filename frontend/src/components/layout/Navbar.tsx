@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 import { navLinks } from "@/lib/site-config";
@@ -15,6 +16,7 @@ import { Logo } from "@/components/layout/Logo";
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -35,24 +37,27 @@ export function Navbar() {
 
         {/* Desktop links */}
         <div className="hidden items-center space-x-10 md:flex">
-          {navLinks.map((link, i) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className={cn(
-                "py-2 text-label-md font-medium transition-colors",
-                i === 0
-                  ? "border-b-2 border-primary font-bold text-primary"
-                  : "text-on-surface-variant hover:text-primary",
-              )}
-            >
-              {link.label}
-            </Link>
-          ))}
+          {navLinks.map((link) => {
+            const active = pathname === link.href;
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={cn(
+                  "py-2 text-label-md font-medium transition-colors",
+                  active
+                    ? "border-b-2 border-primary font-bold text-primary"
+                    : "text-on-surface-variant hover:text-primary",
+                )}
+              >
+                {link.label}
+              </Link>
+            );
+          })}
         </div>
 
         <div className="flex items-center gap-3">
-          <Button href="#contact" className="hidden md:inline-flex">
+          <Button href="/contact" className="hidden md:inline-flex">
             Enroll Now
           </Button>
           {/* Mobile menu toggle */}
@@ -87,7 +92,7 @@ export function Navbar() {
             </Link>
           ))}
           <Button
-            href="#contact"
+            href="/contact"
             className="mt-2 w-full"
             onClick={() => setOpen(false)}
           >

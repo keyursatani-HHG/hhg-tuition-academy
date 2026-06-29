@@ -27,12 +27,12 @@ export interface NavLink {
   href: string;
 }
 
-/** Primary navigation (anchors on the single-page home until inner pages land in Phase 2). */
+/** Primary navigation — dedicated routes for each public page. */
 export const navLinks: NavLink[] = [
   { label: "Home", href: "/" },
-  { label: "About", href: "#about" },
-  { label: "Courses", href: "#courses" },
-  { label: "Achievements", href: "#achievements" },
-  { label: "Faculty", href: "#faculty" },
-  { label: "Contact", href: "#contact" },
+  { label: "About", href: "/about" },
+  { label: "Courses", href: "/courses" },
+  { label: "Achievements", href: "/achievements" },
+  { label: "Faculty", href: "/faculty" },
+  { label: "Contact", href: "/contact" },
 ];
