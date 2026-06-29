@@ -1,0 +1,9 @@
+export { Hero } from "./Hero";
+export { Stats } from "./Stats";
+export { WhyChooseUs } from "./WhyChooseUs";
+export { FeaturedCourses } from "./FeaturedCourses";
+export { Faculty } from "./Faculty";
+export { Achievements } from "./Achievements";
+export { Gallery } from "./Gallery";
+export { Testimonials } from "./Testimonials";
+export { CTASection } from "./CTASection";
