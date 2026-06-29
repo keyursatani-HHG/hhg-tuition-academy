@@ -1,2 +1,6 @@
-"""SQLAlchemy ORM models. Models are registered here so Alembic autogenerate
-discovers them via `Base.metadata`. Populated from Phase 4 onward."""
+"""SQLAlchemy ORM models. Importing them here registers their tables on
+`Base.metadata` so Alembic autogenerate can discover them."""
+
+from app.models.admin_user import AdminUser
+
+__all__ = ["AdminUser"]
