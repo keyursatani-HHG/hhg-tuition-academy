@@ -5,6 +5,7 @@ from fastapi import APIRouter
 from app.api.v1.routes import (
     achievements,
     auth,
+    blog,
     courses,
     dashboard,
     faculty,
@@ -28,6 +29,7 @@ api_router.include_router(faculty.router)
 api_router.include_router(achievements.router)
 api_router.include_router(gallery.router)
 api_router.include_router(testimonials.router)
+api_router.include_router(blog.router)
 
 # Inquiries (public submit + admin manage), students & dashboard (admin only)
 api_router.include_router(inquiries.router)

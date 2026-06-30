@@ -12,6 +12,7 @@ export const adminNav: AdminNavItem[] = [
   { label: "Courses", href: "/admin/courses", icon: "menu_book", section: "Main Menu" },
   { label: "Inquiries", href: "/admin/inquiries", icon: "forum", section: "Main Menu" },
   { label: "Faculty", href: "/admin/faculty", icon: "badge", section: "Main Menu" },
+  { label: "Blog", href: "/admin/blog", icon: "article", section: "Content" },
   { label: "Achievements", href: "/admin/achievements", icon: "star", section: "Content" },
   { label: "Gallery", href: "/admin/gallery", icon: "photo_library", section: "Content" },
   { label: "Testimonials", href: "/admin/testimonials", icon: "reviews", section: "Content" },

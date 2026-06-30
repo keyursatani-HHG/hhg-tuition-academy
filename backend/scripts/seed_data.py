@@ -8,6 +8,7 @@ import asyncio
 
 from app.core.database import AsyncSessionLocal
 from app.models.achievement import Achievement
+from app.models.blog import BlogPost
 from app.models.course import Course
 from app.models.faculty import Faculty
 from app.models.gallery import GalleryImage
@@ -94,6 +95,39 @@ STUDENTS = [
          course_name="Commerce Excellence Program", status=StudentStatus.active),
 ]
 
+BLOG = [
+    dict(
+        title="5 Proven Study Techniques for Board Exam Success",
+        slug="5-proven-study-techniques-for-board-exam-success",
+        excerpt="From active recall to spaced repetition, here are the methods our toppers swear by.",
+        cover_image_url="/images/classroom-1.png",
+        author="Dr. Rajesh Sharma",
+        content=(
+            "Preparing for board exams can feel overwhelming, but the right techniques make all the difference.\n\n"
+            "1. Active Recall — Instead of re-reading notes, quiz yourself. Retrieving information strengthens memory far more than passive review.\n\n"
+            "2. Spaced Repetition — Review material over increasing intervals. This combats the forgetting curve and locks knowledge in for the long term.\n\n"
+            "3. Practice Papers — Simulate exam conditions weekly. Timed practice builds speed, stamina and confidence.\n\n"
+            "4. Teach What You Learn — Explaining a concept to someone else exposes the gaps in your own understanding.\n\n"
+            "5. Rest and Routine — Sleep consolidates memory. A consistent schedule beats last-minute cramming every time.\n\n"
+            "At HHG Academy, every one of these techniques is built into our weekly programme."
+        ),
+    ),
+    dict(
+        title="Why Small Batch Sizes Transform Learning",
+        slug="why-small-batch-sizes-transform-learning",
+        excerpt="Personal attention isn't a luxury — it's the single biggest driver of student outcomes.",
+        cover_image_url="/images/classroom-2.png",
+        author="Ms. Anjali Gupta",
+        content=(
+            "There is a reason we cap our batches at a small number of students.\n\n"
+            "When a teacher works with fewer students, they can identify exactly where each learner struggles and tailor explanations accordingly.\n\n"
+            "Questions get answered immediately. Misconceptions are corrected before they take root. Quieter students get the space to participate.\n\n"
+            "The result is measurable: stronger fundamentals, higher confidence, and consistently better exam performance.\n\n"
+            "Quality education is about connection — and connection scales down, not up."
+        ),
+    ),
+]
+
 INQUIRIES = [
     dict(full_name="John Smith", email="john.smith@email.com", phone="+44 7700 900111",
          student_class="Higher Secondary (PCM/B)", subject="Advanced Mathematics",
@@ -122,6 +156,7 @@ async def main() -> None:
         await _seed_table(session, Achievement, ACHIEVEMENTS)
         await _seed_table(session, GalleryImage, GALLERY)
         await _seed_table(session, Testimonial, TESTIMONIALS)
+        await _seed_table(session, BlogPost, BLOG)
         await _seed_table(session, Student, STUDENTS)
         await _seed_table(session, Inquiry, INQUIRIES)
     print("Done.")

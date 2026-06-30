@@ -40,6 +40,16 @@ async function fetchItems<T>(path: string): Promise<T[] | null> {
   }
 }
 
+async function fetchOne<T>(path: string): Promise<T | null> {
+  try {
+    const res = await fetch(`${API}${path}`, { next: { revalidate: 60 } });
+    if (!res.ok) return null;
+    return (await res.json()) as T;
+  } catch {
+    return null;
+  }
+}
+
 // ───────────── API DTO shapes ─────────────
 interface ApiCourse {
   id: number;
@@ -163,4 +173,25 @@ export async function getGallery(): Promise<GalleryItem[]> {
 export async function getTestimonials(): Promise<Testimonial[]> {
   const items = await fetchItems<ApiTestimonial>("/testimonials?limit=100");
   return items ? items.map(toTestimonial) : seedTestimonials;
+}
+
+// ───────────── Blog ─────────────
+export interface BlogPost {
+  id: number;
+  title: string;
+  slug: string;
+  excerpt: string;
+  content: string;
+  cover_image_url: string;
+  author: string;
+  created_at: string;
+}
+
+export async function getBlogPosts(): Promise<BlogPost[]> {
+  const items = await fetchItems<BlogPost>("/blog?limit=100");
+  return items ?? [];
+}
+
+export async function getBlogPost(slug: string): Promise<BlogPost | null> {
+  return fetchOne<BlogPost>(`/blog/slug/${encodeURIComponent(slug)}`);
 }

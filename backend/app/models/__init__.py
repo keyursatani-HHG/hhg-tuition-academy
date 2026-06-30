@@ -3,6 +3,7 @@
 
 from app.models.achievement import Achievement
 from app.models.admin_user import AdminUser
+from app.models.blog import BlogPost
 from app.models.course import Course
 from app.models.faculty import Faculty
 from app.models.gallery import GalleryImage
@@ -13,6 +14,7 @@ from app.models.testimonial import Testimonial
 __all__ = [
     "Achievement",
     "AdminUser",
+    "BlogPost",
     "Course",
     "Faculty",
     "GalleryImage",
