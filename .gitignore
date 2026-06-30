@@ -41,6 +41,9 @@ env/
 *.sqlite3
 *.db
 
+# ───────────── Uploaded media (runtime) ─────────────
+backend/uploads/
+
 # ───────────── Build artifacts / source UI export ─────────────
 _ui_extracted/
 *.rar

@@ -9,6 +9,22 @@
 const BASE_URL =
   process.env.NEXT_PUBLIC_API_BASE_URL ?? "http://localhost:8000/api/v1";
 
+/** Backend origin (BASE_URL without the /api/v1 suffix) — used to resolve /uploads paths. */
+export const API_ORIGIN = BASE_URL.replace(/\/api\/v1\/?$/, "");
+
+/**
+ * Resolve a stored image path to a displayable URL:
+ * - absolute http(s) URLs are returned as-is
+ * - /uploads/* paths are served by the backend (prefixed with API_ORIGIN)
+ * - everything else (e.g. /images/* seed assets) is served by the frontend
+ */
+export function assetUrl(path: string | null | undefined): string {
+  if (!path) return "";
+  if (/^https?:\/\//.test(path)) return path;
+  if (path.startsWith("/uploads/")) return `${API_ORIGIN}${path}`;
+  return path;
+}
+
 const ACCESS_KEY = "hhg_access_token";
 const REFRESH_KEY = "hhg_refresh_token";
 
@@ -101,6 +117,24 @@ export async function apiFetch<T = unknown>(
 
   if (res.status === 204) return undefined as T;
   return (await res.json()) as T;
+}
+
+/** Upload an image file (multipart) and get back its stored path. Admin only. */
+export async function uploadImage(
+  file: File,
+): Promise<{ url: string; filename: string }> {
+  const headers: Record<string, string> = {};
+  if (tokenStore.access) headers["Authorization"] = `Bearer ${tokenStore.access}`;
+  const form = new FormData();
+  form.append("file", file);
+
+  const res = await fetch(`${BASE_URL}/uploads/image`, {
+    method: "POST",
+    headers, // do NOT set Content-Type; the browser sets the multipart boundary
+    body: form,
+  });
+  if (!res.ok) throw new ApiError(res.status, await parseError(res));
+  return (await res.json()) as { url: string; filename: string };
 }
 
 // ───────────── Shared response shapes ─────────────

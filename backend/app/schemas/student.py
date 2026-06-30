@@ -12,6 +12,7 @@ class StudentBase(BaseModel):
     email: str = Field(default="", max_length=255)
     phone: str = Field(default="", max_length=40)
     course_name: str = Field(default="", max_length=160)
+    photo_url: str = Field(default="", max_length=255)
     status: StudentStatus = StudentStatus.active
 
 
@@ -24,6 +25,7 @@ class StudentUpdate(BaseModel):
     email: str | None = Field(default=None, max_length=255)
     phone: str | None = Field(default=None, max_length=40)
     course_name: str | None = Field(default=None, max_length=160)
+    photo_url: str | None = Field(default=None, max_length=255)
     status: StudentStatus | None = None
 
 

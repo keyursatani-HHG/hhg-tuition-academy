@@ -32,6 +32,12 @@ class Settings(BaseSettings):
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 30
     REFRESH_TOKEN_EXPIRE_DAYS: int = 7
 
+    # ───────────── Uploads ─────────────
+    # Directory (relative to the backend root) where uploaded images are stored
+    # and served from under the /uploads path.
+    UPLOAD_DIR: str = "uploads"
+    MAX_UPLOAD_BYTES: int = 5 * 1024 * 1024  # 5 MB
+
     # ───────────── CORS ─────────────
     # Comma-separated string in env, e.g. "http://localhost:3000,https://hhg.com".
     # Kept as a raw string to avoid pydantic-settings' JSON decoding of complex

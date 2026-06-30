@@ -4,12 +4,13 @@ import { useCallback, useEffect, useState } from "react";
 import { Page, apiFetch } from "@/lib/api";
 import { Icon } from "@/components/ui/Icon";
 import { Modal } from "@/components/admin/Modal";
+import { ImageUploadField } from "@/components/admin/ImageUploadField";
 import { cn } from "@/lib/utils";
 
 export interface Field {
   name: string;
   label: string;
-  type?: "text" | "textarea" | "number" | "select" | "checkbox";
+  type?: "text" | "textarea" | "number" | "select" | "checkbox" | "image";
   options?: { value: string; label: string }[];
   placeholder?: string;
   required?: boolean;
@@ -255,7 +256,18 @@ export function CrudResource<T extends { id: number }>({
           {fields.map((f) => {
             const fieldId = `field-${f.name}`;
             const value = form[f.name];
-            const wide = f.type === "textarea";
+            const wide = f.type === "textarea" || f.type === "image";
+            if (f.type === "image") {
+              return (
+                <div key={f.name} className="sm:col-span-2">
+                  <ImageUploadField
+                    label={f.label}
+                    value={String(value ?? "")}
+                    onChange={(url) => setForm({ ...form, [f.name]: url })}
+                  />
+                </div>
+              );
+            }
             return (
               <div key={f.name} className={cn(wide && "sm:col-span-2")}>
                 {f.type !== "checkbox" && (

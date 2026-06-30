@@ -24,6 +24,7 @@ class Student(Base, TimestampMixin):
     email: Mapped[str] = mapped_column(String(255), nullable=False, default="")
     phone: Mapped[str] = mapped_column(String(40), nullable=False, default="")
     course_name: Mapped[str] = mapped_column(String(160), nullable=False, default="")
+    photo_url: Mapped[str] = mapped_column(String(255), nullable=False, default="")
     status: Mapped[StudentStatus] = mapped_column(
         SAEnum(StudentStatus, name="student_status"),
         default=StudentStatus.active,
