@@ -44,7 +44,7 @@ const fields: Field[] = [
       { value: "primary-container", label: "Light Blue" },
     ],
   },
-  { name: "image_url", label: "Photo URL", placeholder: "/images/student-1.png" },
+  { name: "image_url", label: "Student Photo", type: "image" },
   { name: "display_order", label: "Display Order", type: "number", default: 0 },
   { name: "is_published", label: "Published", type: "checkbox", default: true },
 ];

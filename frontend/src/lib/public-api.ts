@@ -17,6 +17,7 @@ import {
 } from "@/data/home";
 import { allCourses as seedAllCourses } from "@/data/courses";
 import { facultyMembers as seedFaculty, type FacultyMember } from "@/data/faculty";
+import { assetUrl } from "@/lib/api";
 
 const API =
   process.env.API_BASE_URL ??
@@ -102,7 +103,7 @@ const toCourse = (c: ApiCourse): Course => ({
   description: c.description,
   duration: c.duration,
   schedule: c.schedule,
-  image: c.image_url || "/images/classroom-1.png",
+  image: assetUrl(c.image_url) || "/images/classroom-1.png",
 });
 
 const toFaculty = (f: ApiFaculty): FacultyMember & HomeFaculty => ({
@@ -112,7 +113,7 @@ const toFaculty = (f: ApiFaculty): FacultyMember & HomeFaculty => ({
   subject: f.subject,
   qualification: f.qualification,
   bio: f.bio,
-  image: f.image_url || "/images/faculty-1.png",
+  image: assetUrl(f.image_url) || "/images/faculty-1.png",
 });
 
 const toAchievement = (a: ApiAchievement): Achievement => ({
@@ -122,11 +123,11 @@ const toAchievement = (a: ApiAchievement): Achievement => ({
   detail: a.detail,
   badge: a.badge,
   badgeColor: a.badge_color,
-  image: a.image_url || "/images/student-1.png",
+  image: assetUrl(a.image_url) || "/images/student-1.png",
 });
 
 const toGallery = (g: ApiGallery): GalleryItem => ({
-  src: g.image_url,
+  src: assetUrl(g.image_url),
   alt: g.caption,
 });
 
@@ -136,7 +137,7 @@ const toTestimonial = (t: ApiTestimonial): Testimonial => ({
   name: t.name,
   role: t.role,
   rating: t.rating,
-  image: t.image_url || "/images/student-1.png",
+  image: assetUrl(t.image_url) || "/images/student-1.png",
 });
 
 // ───────────── Public getters (with seed fallback) ─────────────

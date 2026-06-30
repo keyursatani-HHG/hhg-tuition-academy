@@ -35,7 +35,7 @@ const fields: Field[] = [
   { name: "price", label: "Price", placeholder: "₹2,500/month" },
   { name: "duration", label: "Duration", placeholder: "12 Months" },
   { name: "schedule", label: "Schedule", placeholder: "Mon-Wed-Fri" },
-  { name: "image_url", label: "Image URL", placeholder: "/images/classroom-1.png" },
+  { name: "image_url", label: "Course Image", type: "image" },
   { name: "description", label: "Description", type: "textarea" },
   { name: "is_published", label: "Published", type: "checkbox", default: true },
 ];

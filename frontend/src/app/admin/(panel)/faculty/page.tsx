@@ -34,7 +34,7 @@ const fields: Field[] = [
   { name: "role", label: "Role", placeholder: "e.g. Senior Physics Faculty" },
   { name: "subject", label: "Primary Subject", placeholder: "Physics" },
   { name: "qualification", label: "Highest Qualification", placeholder: "PhD, Quantum Physics" },
-  { name: "image_url", label: "Photo URL", placeholder: "/images/faculty-1.png" },
+  { name: "image_url", label: "Faculty Photo", type: "image" },
   { name: "display_order", label: "Display Order", type: "number", default: 0 },
   { name: "bio", label: "Biography", type: "textarea" },
   { name: "is_active", label: "Active", type: "checkbox", default: true },

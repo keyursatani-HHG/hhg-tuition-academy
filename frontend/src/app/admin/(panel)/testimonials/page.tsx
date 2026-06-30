@@ -54,7 +54,7 @@ const fields: Field[] = [
     default: "5",
     options: [5, 4, 3, 2, 1].map((n) => ({ value: String(n), label: `${n} stars` })),
   },
-  { name: "image_url", label: "Photo URL", placeholder: "/images/student-1.png" },
+  { name: "image_url", label: "Photo", type: "image" },
   { name: "quote", label: "Quote", type: "textarea", required: true },
   { name: "is_published", label: "Published", type: "checkbox", default: true },
 ];

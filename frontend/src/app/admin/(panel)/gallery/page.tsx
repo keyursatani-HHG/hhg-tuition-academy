@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { CrudResource, type Column, type Field } from "@/components/admin/CrudResource";
+import { assetUrl } from "@/lib/api";
 
 interface GalleryImage {
   id: number;
@@ -18,7 +19,7 @@ const columns: Column<GalleryImage>[] = [
     render: (r) => (
       <div className="relative h-12 w-16 overflow-hidden rounded-lg bg-surface-container">
         {r.image_url && (
-          <Image src={r.image_url} alt={r.caption} fill sizes="64px" className="object-cover" />
+          <Image src={assetUrl(r.image_url)} alt={r.caption} fill sizes="64px" className="object-cover" unoptimized />
         )}
       </div>
     ),
@@ -37,7 +38,7 @@ const columns: Column<GalleryImage>[] = [
 ];
 
 const fields: Field[] = [
-  { name: "image_url", label: "Image URL", required: true, placeholder: "/images/classroom-1.png" },
+  { name: "image_url", label: "Image", type: "image" },
   { name: "caption", label: "Caption", placeholder: "Classroom" },
   { name: "display_order", label: "Display Order", type: "number", default: 0 },
   { name: "is_published", label: "Published", type: "checkbox", default: true },
