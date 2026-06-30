@@ -6,7 +6,7 @@ export interface MethodologyStep {
 
 export const methodology: MethodologyStep[] = [
   {
-    icon: "diagnostic",
+    icon: "troubleshoot",
     title: "Diagnostic Assessment",
     description:
       "We begin with a precise analysis of a student's strengths and conceptual gaps before teaching begins.",
