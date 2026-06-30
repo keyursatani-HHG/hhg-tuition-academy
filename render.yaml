@@ -1,0 +1,28 @@
+# Render Blueprint for the HHG Academy backend (free tier).
+# In Render: New + → Blueprint → connect this repo. Render reads this file.
+# After it deploys, set DATABASE_URL (Neon) and BACKEND_CORS_ORIGINS (Vercel URL)
+# in the service's Environment tab, then open a Shell to seed the admin user.
+services:
+  - type: web
+    name: hhg-backend
+    runtime: python
+    rootDir: backend
+    plan: free
+    region: oregon
+    buildCommand: pip install -r requirements.txt
+    # Apply migrations, then start the API on Render's provided $PORT.
+    startCommand: alembic upgrade head && uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /api/v1/health
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.12.10"
+      - key: ENVIRONMENT
+        value: production
+      - key: DEBUG
+        value: "false"
+      - key: SECRET_KEY
+        generateValue: true # Render generates a strong secret
+      - key: DATABASE_URL
+        sync: false # set manually to your Neon connection string
+      - key: BACKEND_CORS_ORIGINS
+        sync: false # set to your Vercel URL, e.g. https://hhg-academy.vercel.app
