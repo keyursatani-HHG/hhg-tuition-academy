@@ -15,7 +15,7 @@ export const siteConfig = {
   description:
     "Best tuition classes for academic excellence. Expert teachers, small batches and proven results across Secondary, Higher Secondary, Science and Commerce streams.",
   establishedYear: 2014,
-  whatsappNumber: "1234567890", // E.164 without '+', used for wa.me link
+  whatsappNumber: "917698406361", // E.164 without '+', used for wa.me link
   contact: {
     address:
       "420, Silver Business Hub, Bapasitaram Chowk, BRTS Rd, Simada Gam, Surat, Gujarat 395011",
@@ -26,8 +26,8 @@ export const siteConfig = {
     region: "Gujarat",
     postalCode: "395011",
     country: "IN",
-    phone: "+91 00000 00000", // TODO: set your real phone number
-    email: "admissions@hhgacademy.edu", // TODO: set your real email
+    phone: "+91 76984 06361",
+    email: "hhgsoftechteam11@gmail.com",
   },
   // Real geo coordinates for local/GEO SEO (from Google Maps)
   geo: { latitude: 21.218216, longitude: 72.895207 },
