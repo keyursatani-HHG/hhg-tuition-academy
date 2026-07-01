@@ -54,6 +54,12 @@ export const metadata: Metadata = {
     description: siteConfig.description,
   },
   icons: { icon: "/favicon.ico" },
+  verification: {
+    other: {
+      "ahrefs-site-verification":
+        "047c621ef538a27ccca185cfe5d0de459c5b7ae384083767e910e3b09f773583",
+    },
+  },
 };
 
 export default function RootLayout({
