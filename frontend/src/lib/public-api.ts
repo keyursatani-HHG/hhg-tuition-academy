@@ -29,9 +29,16 @@ interface GalleryItem {
   alt: string;
 }
 
+// Abort slow requests (e.g. a sleeping free-tier backend during build) so we
+// fall back to seed data instead of hanging past Next's page-generation limit.
+const FETCH_TIMEOUT_MS = 8000;
+
 async function fetchItems<T>(path: string): Promise<T[] | null> {
   try {
-    const res = await fetch(`${API}${path}`, { next: { revalidate: 60 } });
+    const res = await fetch(`${API}${path}`, {
+      next: { revalidate: 60 },
+      signal: AbortSignal.timeout(FETCH_TIMEOUT_MS),
+    });
     if (!res.ok) return null;
     const data = await res.json();
     const items = data?.items;
@@ -43,7 +50,10 @@ async function fetchItems<T>(path: string): Promise<T[] | null> {
 
 async function fetchOne<T>(path: string): Promise<T | null> {
   try {
-    const res = await fetch(`${API}${path}`, { next: { revalidate: 60 } });
+    const res = await fetch(`${API}${path}`, {
+      next: { revalidate: 60 },
+      signal: AbortSignal.timeout(FETCH_TIMEOUT_MS),
+    });
     if (!res.ok) return null;
     return (await res.json()) as T;
   } catch {
