@@ -1,0 +1,9 @@
+# Netlify configuration for the HHG Academy frontend (Next.js in /frontend).
+# Netlify reads this at the repo root and builds the app in the frontend/ folder.
+[build]
+  base = "frontend"
+  command = "npm run build"
+
+# Official Next.js runtime — handles SSR, server components, image optimization.
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
