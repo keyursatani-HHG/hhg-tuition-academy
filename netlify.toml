@@ -3,6 +3,8 @@
 [build]
   base = "frontend"
   command = "npm run build"
+  # Publish the Next build output (relative to base) — must differ from base.
+  publish = ".next"
 
 # Official Next.js runtime — handles SSR, server components, image optimization.
 [[plugins]]
