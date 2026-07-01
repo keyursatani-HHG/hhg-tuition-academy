@@ -66,11 +66,14 @@ python -m scripts.seed_data     # optional: sample courses/faculty/blog
 
 1. Sign up at <https://vercel.com> (log in with GitHub) → **Add New → Project** → your repo.
 2. Set **Root Directory** = `frontend`.
-3. Add an Environment Variable:
+3. Add Environment Variables:
    | Key | Value |
    | --- | --- |
    | `NEXT_PUBLIC_API_BASE_URL` | `https://hhg-backend.onrender.com/api/v1` |
+   | `NEXT_PUBLIC_SITE_URL` | your Vercel URL, e.g. `https://hhg-academy.vercel.app` |
 4. Deploy. You'll get a URL like `https://hhg-academy.vercel.app`.
+   (If you set `NEXT_PUBLIC_SITE_URL` only after the first deploy, redeploy so the
+   sitemap/robots/canonical URLs pick it up.)
 
 ---
 

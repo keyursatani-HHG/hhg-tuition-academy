@@ -1,6 +1,7 @@
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { WhatsAppButton } from "@/components/layout/WhatsAppButton";
+import { StructuredData } from "@/components/seo/StructuredData";
 
 /**
  * Shared chrome for all public marketing pages: fixed navbar, footer, and the
@@ -13,6 +14,7 @@ export default function PublicLayout({
 }) {
   return (
     <>
+      <StructuredData />
       <Navbar />
       <main className="pt-24">{children}</main>
       <Footer />
