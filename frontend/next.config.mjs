@@ -22,8 +22,9 @@ function uploadsRemotePattern() {
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Emit a minimal standalone server bundle for Docker/VPS deployment.
-  output: "standalone",
+  // Standalone output is for Docker/VPS. Netlify/Vercel use their own adapters,
+  // and standalone can break Netlify's Next runtime — so skip it there.
+  output: process.env.NETLIFY ? undefined : "standalone",
   images: {
     remotePatterns: uploadsRemotePattern(),
   },
